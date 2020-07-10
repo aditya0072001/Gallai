@@ -10,9 +10,9 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120.0,
+      height: 100.0,
       margin: EdgeInsets.symmetric(horizontal: 10.0), // in logical pixels
-      padding: const EdgeInsets.fromLTRB(5, 10, 5, 1),
+      padding: const EdgeInsets.fromLTRB(10, 25, 10, 1),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -73,6 +73,7 @@ class MyScaffold extends StatelessWidget {
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     title: 'My app', // used by the OS task switcher
     home: MyScaffold(),
   ));
