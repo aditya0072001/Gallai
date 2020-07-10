@@ -1,20 +1,79 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+class MyAppBar extends StatelessWidget {
+  MyAppBar({this.title});
 
-class MyApp extends StatelessWidget {
+  // Fields in a Widget subclass are always marked "final".
+
+  final Widget title;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome to Flutter'),
-        ),
-        body: Center(
-          child: Text('Hello World'),
-        ),
+    return Container(
+      height: 120.0,
+      margin: EdgeInsets.symmetric(horizontal: 10.0), // in logical pixels
+      padding: const EdgeInsets.fromLTRB(5, 10, 5, 1),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.grey,
+            offset: Offset(1.0, 6.0),
+            blurRadius: 40.0,
+          ),
+        ],
+      ),
+      // Row is a horizontal, linear layout.
+      child: Row(
+        // <Widget> is the type of items in the list.
+        children: <Widget>[
+          // Expanded expands its child to fill the available space.
+          Expanded(
+            child: title,
+          ),
+        ],
       ),
     );
   }
+}
+
+class MyScaffold extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Material is a conceptual piece of paper on which the UI appears.
+    return Material(
+      // Column is a vertical, linear layout.
+      child: Column(
+        children: <Widget>[
+          MyAppBar(
+            title: Text(
+              'Gallai',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 30,
+                fontFamily: 'Roboto',
+                fontStyle: FontStyle.italic,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Expanded(
+            child: Center(
+              child: Text(
+                'Your sexy images will load here',
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(MaterialApp(
+    title: 'My app', // used by the OS task switcher
+    home: MyScaffold(),
+  ));
 }
