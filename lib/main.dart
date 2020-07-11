@@ -9,19 +9,13 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.0,
+      height: 80.0,
       margin: EdgeInsets.symmetric(horizontal: 10.0), // in logical pixels
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 1),
       decoration: BoxDecoration(
         color: Colors.red[400],
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(1.0, 6.0),
-            blurRadius: 40.0,
-          ),
-        ],
+        borderRadius: BorderRadius.horizontal(
+            left: Radius.elliptical(20, 20), right: Radius.elliptical(20, 20)),
       ),
       // Row is a horizontal, linear layout.
       child: Row(
@@ -50,21 +44,14 @@ class MyScaffold extends StatelessWidget {
               'Gallai',
               style: GoogleFonts.lobster(
                 textStyle: TextStyle(
-                  color: Colors.black38,
+                  color: Colors.white,
                   fontSize: 30,
-                  letterSpacing: 4,
+                  letterSpacing: 5,
                   fontFamily: 'Roboto',
                   fontStyle: FontStyle.italic,
                 ),
               ),
               textAlign: TextAlign.center,
-            ),
-          ),
-          Expanded(
-            child: Center(
-              child: Text(
-                'Your sexy images will load here',
-              ),
             ),
           ),
         ],
