@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screens/all/all.dart';
+import 'widgets/cat_select.dart';
 
 class MyAppBar extends StatelessWidget {
   MyAppBar({this.title});
@@ -9,13 +10,13 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.0,
-      margin: EdgeInsets.symmetric(horizontal: 10.0), // in logical pixels
+      height: 100.0,
+      //margin: EdgeInsets.symmetric(horizontal: 10.0), // in logical pixels
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 1),
       decoration: BoxDecoration(
-        color: Colors.red[400],
-        borderRadius: BorderRadius.horizontal(
-            left: Radius.elliptical(20, 20), right: Radius.elliptical(20, 20)),
+        color: Colors.red,
+        //borderRadius: BorderRadius.horizontal(
+        //    left: Radius.elliptical(20, 20), right: Radius.elliptical(20, 20)),
       ),
       // Row is a horizontal, linear layout.
       child: Row(
@@ -36,6 +37,7 @@ class MyScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Material is a conceptual piece of paper on which the UI appears.
     return Material(
+      color: Colors.red,
       // Column is a vertical, linear layout.
       child: Column(
         children: <Widget>[
@@ -54,6 +56,17 @@ class MyScaffold extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
+          CategoricalSelector(),
+          Expanded(
+              child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.0),
+                  topRight: Radius.circular(30.0)),
+            ),
+          )),
+          All()
         ],
       ),
     );

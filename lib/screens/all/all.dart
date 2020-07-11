@@ -36,18 +36,17 @@ class _AllState extends State<All> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: new Scaffold(
-        body: _buildGrid(),
-      ),
+    return Container(
+      height: 500,
+      color: Colors.white,
+      child: _buildGrid(),
     );
   }
 
   Widget _buildGrid() {
     return GridView.extent(
         maxCrossAxisExtent: 150.0,
-        // padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(4.0),
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
         children: _buildGridTileList(allImage.length));
@@ -61,11 +60,14 @@ class _AllState extends State<All> {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Image.file(
-                  File(allImage[index].toString()),
-                  width: 96.0,
-                  height: 96.0,
-                  fit: BoxFit.contain,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.file(
+                    File(allImage[index].toString()),
+                    width: 96.0,
+                    height: 96.0,
+                    fit: BoxFit.cover,
+                  ),
                 )
               ],
             )));
