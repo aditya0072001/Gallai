@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'screens/all/all.dart';
 
 class MyAppBar extends StatelessWidget {
   MyAppBar({this.title});
-
-  // Fields in a Widget subclass are always marked "final".
-
   final Widget title;
 
   @override
@@ -14,7 +13,7 @@ class MyAppBar extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 10.0), // in logical pixels
       padding: const EdgeInsets.fromLTRB(10, 25, 10, 1),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.red[400],
         borderRadius: BorderRadius.circular(20),
         boxShadow: <BoxShadow>[
           BoxShadow(
@@ -49,11 +48,14 @@ class MyScaffold extends StatelessWidget {
           MyAppBar(
             title: Text(
               'Gallai',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 30,
-                fontFamily: 'Roboto',
-                fontStyle: FontStyle.italic,
+              style: GoogleFonts.lobster(
+                textStyle: TextStyle(
+                  color: Colors.black38,
+                  fontSize: 30,
+                  letterSpacing: 4,
+                  fontFamily: 'Roboto',
+                  fontStyle: FontStyle.italic,
+                ),
               ),
               textAlign: TextAlign.center,
             ),
