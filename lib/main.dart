@@ -63,7 +63,7 @@ class MyScaffold extends StatelessWidget {
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    title: 'My app', // used by the OS task switcher
+    title: 'Gallai', // used by the OS task switcher
     home: MyScaffold(),
   ));
 }
