@@ -1,3 +1,4 @@
+import 'package:gallary/widgets/image_view.dart';
 import 'package:image_gallery/image_gallery.dart';
 import 'dart:collection';
 
@@ -26,7 +27,7 @@ class _AllState extends State<All> {
   Future<void> loadImageList() async {
     Map<dynamic, dynamic> allImageTemp;
     allImageTemp = await FlutterGallaryPlugin.getAllImages;
-    print(" call $allImageTemp.length");
+    print(" call $allImageTemp");
 
     setState(() {
       this.allImage = allImageTemp['URIList'] as List;
@@ -56,20 +57,31 @@ class _AllState extends State<All> {
     return List<Container>.generate(
         count,
         (int index) => Container(
-                child: new Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.file(
-                    File(allImage[index].toString()),
-                    width: 96.0,
-                    height: 96.0,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              ],
+                child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ImageView(
+                              imagePath: allImage[index].toString(),
+                              title: allNameList[index].toString(),
+                            )));
+              },
+              child: new Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.file(
+                      File(allImage[index].toString()),
+                      width: 96.0,
+                      height: 96.0,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                ],
+              ),
             )));
   }
 }
