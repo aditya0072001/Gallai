@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:gallary/widgets/image_view.dart';
 import 'package:image_gallery/image_gallery.dart';
+import 'package:gallary/models/modell.dart';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
@@ -7,31 +10,50 @@ import 'dart:io';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:tflite/tflite.dart';
 
 class All extends StatefulWidget {
+  final String category;
+  const All({this.category});
   @override
-  _AllState createState() => new _AllState();
+  _AllState createState() => new _AllState(this.category);
 }
 
 class _AllState extends State<All> {
   Map<dynamic, dynamic> allImageInfo = new HashMap();
+  String category;
+  Timer timer;
   List allImage = new List();
   List allNameList = new List();
-
+  _AllState(this.category);
   @override
   void initState() {
     super.initState();
     loadImageList();
+    timer = Timer.periodic(
+        Duration(seconds: 15),
+        (Timer t) => setState(() {
+              loadImageList();
+            }));
   }
 
   Future<void> loadImageList() async {
+    loadModel();
     Map<dynamic, dynamic> allImageTemp;
     allImageTemp = await FlutterGallaryPlugin.getAllImages;
-    print(" call $allImageTemp");
 
     setState(() {
-      this.allImage = allImageTemp['URIList'] as List;
-      this.allNameList = allImageTemp['DISPLAY_NAME'] as List;
+      if (category.isNotEmpty && category == '0') {
+        this.allImage = allImageTemp['URIList'] as List;
+        this.allNameList = allImageTemp['DISPLAY_NAME'] as List;
+        //recognizeImage(allImageTemp['URIList'] as List, 2);
+      } else if (category.isNotEmpty && category == '2') {
+        recognizeImage(allImage, 2);
+      } else if (category.isNotEmpty && category == '3') {
+        recognizeImage(allImage, 1);
+      } else if (category.isNotEmpty && category == '4') {
+        recognizeImage(allImage, 0);
+      }
     });
   }
 
@@ -83,5 +105,77 @@ class _AllState extends State<All> {
                 ],
               ),
             )));
+  }
+
+  loadModel() async {
+    await Tflite.loadModel(
+      model: "assets/model_unquant.tflite",
+      labels: "assets/labels.txt",
+      useGpuDelegate: true,
+    );
+  }
+
+  recognizeImage(List images, int choice) async {
+    var tempImg = new List<String>.from(images);
+    String i;
+    if (choice == 1) {
+      for (i in images) {
+        if (i.isNotEmpty) {
+          try {
+            var recognition = await Tflite.runModelOnImage(
+              path: i,
+              numResults: 3,
+              threshold: 0.01,
+              imageMean: 0.0,
+              imageStd: 255.0,
+            );
+            if (recognition[0]["confidence"] * 100 > 50) {
+            } else {
+              tempImg.remove(i);
+            }
+          } catch (e) {}
+        }
+      }
+    } else if (choice == 2) {
+      for (i in images) {
+        if (i.isNotEmpty) {
+          try {
+            var recognition = await Tflite.runModelOnImage(
+              path: i,
+              numResults: 3,
+              threshold: 0.01,
+              imageMean: 0.0,
+              imageStd: 255.0,
+            );
+            print(recognition);
+            if (recognition[0]["confidence"] * 100 > 50) {
+            } else {
+              tempImg.remove(i);
+            }
+          } catch (e) {}
+        }
+      }
+    } else if (choice == 3) {
+      for (i in images) {
+        if (i.isNotEmpty) {
+          try {
+            var recognition = await Tflite.runModelOnImage(
+              path: i,
+              numResults: 3,
+              threshold: 0.01,
+              imageMean: 0.0,
+              imageStd: 255.0,
+            );
+            if (recognition[0]["confidence"] * 100 > 50) {
+            } else {
+              tempImg.remove(i);
+            }
+          } catch (e) {}
+        }
+      }
+    }
+    setState(() {
+      this.allImage = tempImg;
+    });
   }
 }

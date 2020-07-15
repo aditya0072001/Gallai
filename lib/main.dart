@@ -66,7 +66,7 @@ class MyScaffold extends StatelessWidget {
                   topRight: Radius.circular(30.0)),
             ),
           )),
-          All()
+          All(category: CategoricalSelectorState().selectedIndex.toString())
         ],
       ),
     );

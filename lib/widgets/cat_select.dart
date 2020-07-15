@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class CategoricalSelector extends StatefulWidget {
+  static of(BuildContext context, {bool root = false}) => root
+      ? context.findRootAncestorStateOfType<CategoricalSelectorState>()
+      : context.findAncestorStateOfType<CategoricalSelectorState>();
   @override
-  _CategoricalSelectorState createState() => _CategoricalSelectorState();
+  CategoricalSelectorState createState() => CategoricalSelectorState();
 }
 
-class _CategoricalSelectorState extends State<CategoricalSelector> {
+class CategoricalSelectorState extends State<CategoricalSelector> {
   int selectedIndex = 0;
   final List<String> categories = ["All", "Person", "Screenshot", "Memes"];
+
   @override
   Widget build(BuildContext context) {
     return Container(

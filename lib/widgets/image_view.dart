@@ -5,7 +5,8 @@ import 'package:image_gallery/image_gallery.dart';
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'package:wc_flutter_share/wc_flutter_share.dart';
+//import 'package:wc_flutter_share/wc_flutter_share.dart';
+import 'package:tflite/tflite.dart';
 
 class ImageView extends StatelessWidget {
   final String imagePath;
@@ -41,7 +42,7 @@ class ImageView extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
+            /* Padding(
               padding: EdgeInsets.all(10),
               child: RaisedButton.icon(
                   onPressed: () async {
@@ -59,9 +60,10 @@ class ImageView extends StatelessWidget {
                     }
                   },
                   icon: Icon(Icons.share),
-                  label: Text(''),
+                  label: Text('Share'),
                   color: Colors.red),
             )
+            */
           ],
         ),
       ),
