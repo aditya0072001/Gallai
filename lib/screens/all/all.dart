@@ -1,15 +1,15 @@
-import 'dart:convert';
+//import 'dart:convert';
 
 import 'package:gallary/widgets/image_view.dart';
 import 'package:image_gallery/image_gallery.dart';
-import 'package:gallary/models/modell.dart';
+//import 'package:gallary/models/modell.dart';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:tflite/tflite.dart';
 
 class All extends StatefulWidget {
@@ -22,7 +22,7 @@ class All extends StatefulWidget {
 class _AllState extends State<All> {
   Map<dynamic, dynamic> allImageInfo = new HashMap();
   String category;
-  Timer timer;
+  //Timer timer;
   List allImage = new List();
   List allNameList = new List();
   _AllState(this.category);
@@ -30,11 +30,6 @@ class _AllState extends State<All> {
   void initState() {
     super.initState();
     loadImageList();
-    timer = Timer.periodic(
-        Duration(seconds: 15),
-        (Timer t) => setState(() {
-              loadImageList();
-            }));
   }
 
   Future<void> loadImageList() async {

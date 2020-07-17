@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:gallary/widgets/image_view.dart';
-import 'package:image_gallery/image_gallery.dart';
+//import 'package:photo_view/photo_view.dart';
+//import 'package:gallary/widgets/image_view.dart';
+//import 'package:image_gallery/image_gallery.dart';
 import 'dart:io';
-import 'dart:async';
-import 'package:flutter/services.dart';
+//import 'dart:async';
+//import 'package:flutter/services.dart';
 //import 'package:wc_flutter_share/wc_flutter_share.dart';
-import 'package:tflite/tflite.dart';
+//import 'package:tflite/tflite.dart';
 
 class ImageView extends StatelessWidget {
   final String imagePath;

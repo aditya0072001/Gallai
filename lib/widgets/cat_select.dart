@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CategoricalSelector extends StatefulWidget {
+  final customFunction;
   static of(BuildContext context, {bool root = false}) => root
       ? context.findRootAncestorStateOfType<CategoricalSelectorState>()
       : context.findAncestorStateOfType<CategoricalSelectorState>();
   @override
+  CategoricalSelector({Key key, this.customFunction}) : super(key: key);
   CategoricalSelectorState createState() => CategoricalSelectorState();
 }
 
@@ -24,7 +26,8 @@ class CategoricalSelectorState extends State<CategoricalSelector> {
               return GestureDetector(
                 onTap: () {
                   setState(() {
-                    selectedIndex = index;
+                    this.selectedIndex = index;
+                    widget.customFunction(this.selectedIndex);
                   });
                 },
                 child: Padding(
@@ -44,5 +47,9 @@ class CategoricalSelectorState extends State<CategoricalSelector> {
                 ),
               );
             }));
+  }
+
+  getSelectedIndex() {
+    return this.selectedIndex;
   }
 }

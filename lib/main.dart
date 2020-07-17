@@ -32,7 +32,19 @@ class MyAppBar extends StatelessWidget {
   }
 }
 
-class MyScaffold extends StatelessWidget {
+class MyScaffold extends StatefulWidget {
+  @override
+  MyScaffoldState createState() => MyScaffoldState();
+}
+
+class MyScaffoldState extends State<MyScaffold> {
+  int index = 0;
+  void changeIndex(newValue) {
+    setState(() {
+      index = newValue;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Material is a conceptual piece of paper on which the UI appears.
@@ -56,7 +68,9 @@ class MyScaffold extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          CategoricalSelector(),
+          CategoricalSelector(
+            customFunction: changeIndex,
+          ),
           Expanded(
               child: Container(
             decoration: BoxDecoration(
@@ -66,7 +80,7 @@ class MyScaffold extends StatelessWidget {
                   topRight: Radius.circular(30.0)),
             ),
           )),
-          All(category: CategoricalSelectorState().selectedIndex.toString())
+          All(category: index.toString())
         ],
       ),
     );
